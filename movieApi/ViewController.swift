@@ -24,7 +24,11 @@ class ViewController: UIViewController {
         let dataTask = session.dataTask(with: movieURL) { data, response, error in if let e = error{
             print("No movie \(e)")
         } else{
-            
+            if let d = data{
+                if let jsonObj = try? JSONSerialization.jsonObject(with: d, options: .fragmentsAllowed) as? NSDictionary{
+                    print(jsonObj)
+                }
+            }
         }
             
         }
