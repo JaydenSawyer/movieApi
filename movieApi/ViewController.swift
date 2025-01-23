@@ -29,8 +29,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if let usr = textField.text, !usr.isEmpty {
             self.movieName = usr
             getMovies()
-        } else {
-            label1.text = "Please enter a valid movie name"
         }
     }
     
@@ -42,9 +40,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let dataTask = session.dataTask(with: movieURL) { data, response, error in
                 if let error = error {
                     print("Error finding movies: \(error)")
-                    DispatchQueue.main.async {
-                        self.label1.text = "Error getting movies"
-                    }
                     return
                 }
                 
@@ -58,7 +53,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     }
                     DispatchQueue.main.async {
                         if self.movies.isEmpty {
-                            self.label1.text = "No movies found for \"\(self.movieName)\""
+                            self.label1.text = "No movies found with word \"\(self.movieName)\""
                         } else {
                             self.label1.text = "Found \(self.movies.count) movies"
                         }
